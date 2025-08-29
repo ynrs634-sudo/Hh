@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chikha Loyalty Wheel</title>
+<style>
+body { font-family: Arial, sans-serif; display:flex; flex-direction:column; align-items:center; padding:20px; }
+#wheel { width:300px; height:300px; border:10px solid #333; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:20px; }
+form { display:flex; flex-direction:column; width:80%; max-width:300px; }
+input, button { margin:5px 0; padding:10px; font-size:16px; }
+</style>
+</head>
+<body>
+<h1>Spin the Loyalty Wheel</h1>
+<div id="wheel">🎡 Wheel</div>
+<form id="spinForm">
+<input type="text" name="name" placeholder="Name" required>
+<input type="email" name="email" placeholder="Email" required>
+<input type="tel" name="phone" placeholder="Phone" required>
+<p>Follow us on <a href="https://www.instagram.com/chikha.pizza.and.coffee" target="_blank">Instagram</a> before spinning.</p>
+<button type="submit">Spin</button>
+</form>
+<div id="result"></div>
+<script>
+document.getElementById('spinForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData.entries());
+  const res = await fetch('/api/spin', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
+  const json = await res.json();
+  document.getElementById('result').innerText = json.prize ? 'You won: '+json.prize : json.message;
+});
+</script>
+</body>
+</html>
