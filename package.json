@@ -1,0 +1,17 @@
+{
+  "name": "chikha-loyalty",
+  "version": "1.0.0",
+  "description": "Loyalty program with spin wheel for Chikha Pizza",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "sqlite": "^4.1.2",
+    "body-parser": "^1.20.2",
+    "express-session": "^1.17.3"
+  }
+}
